@@ -2,16 +2,20 @@ package Data;
 
 import java.util.Random;
 
+import Data.Enums.Units;
+
+
 public class Unit {
-    private int power;
+
+    private int power, cost;
     private String name;
 
-
-
-    public Unit(String name){
-        this.name = name;
+    public Unit(Units unit){
+        this.name = unit.name();
+        this.cost = unit.cost();
         power = 10;
     }
+    
     public void fight(Object otherObject){
         if(otherObject instanceof Unit){
             Unit otherUnit = (Unit) otherObject;
@@ -25,12 +29,22 @@ public class Unit {
                 System.out.println(otherUnit.name + " wins");
             }
         }
-
     }
-
-
-    public static void main(String[] args){
-        Unit unit = new Unit("pesho");
-        unit.fight(new Unit("gosho"));
+    
+    public boolean equals(Unit otherUnit){
+    	return this.getName().equals(otherUnit.getName());
     }
+    
+    public String getName(){
+    	return name;
+    }
+    
+    public int getCost(){
+    	return cost;
+    }
+    
+    public String toString(){
+    	return name;
+    }
+    
 }

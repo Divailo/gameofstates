@@ -1,12 +1,12 @@
 package Data;
 
-import Data.Buildings.Building;
-
 import java.util.ArrayList;
+
+import Data.Buildings.Building;
 
 public class State {
 	
-	private int military, culture, faith, economy;
+	private int military, culture, faith, economy, gold;
 	private String name;
     private ArrayList<Building> buildings;
 	
@@ -14,20 +14,46 @@ public class State {
 		this.name = name;
         buildings = new ArrayList<Building>();
 		military = mil; culture = cul;	faith = fai; economy = eco;
-	}
-	
-	public void fight(State other){
-		
+		gold = 200;
 	}
 
     public void build(Building building){
-        buildings.add(building);
+    	if(isThereSufficientGold(building.getPotentialCost())){
+	    	if(buildings.contains(building)){
+	    		System.out.println(building + " upgraded successfully to " + (building.getLevel()+1) + " !It costed " + building.getCost() + " gold");
+	    	}
+	    	else{
+	    		System.out.println(building + " constructed! It costed "+ building.getCost()+ " gold");
+	    		buildings.add(building);
+	    	}
+    	gold -= building.getCost();
+	    building.upgrade();
+    	}
+    	else{
+    		System.out.println("Not enough gold");
+    	}
     }
 
     public void trainUnit(Unit unit){
-
+    	for(Building built : buildings){
+    		if(built.getUnit().equals(unit)){
+    			int goldSpent = unit.getCost();
+    			gold -= goldSpent;
+    			System.out.println(goldSpent + " gold spent");
+    			System.out.println("Unit: "+unit+" trained successfully!");
+    			return;
+    		}
+    	}
+    	System.out.println("The building is not built yet.");
     }
-
+    
+    public boolean isThereSufficientGold(int cost){
+    	return (gold - cost) >= 0;
+    }
+    
+    public void setGold(int gold){
+    	this.gold = gold;
+    }
 
 
 	//getting shit methods
@@ -54,17 +80,13 @@ public class State {
 	public ArrayList<Building> getBuildings(){
         return buildings;
     }
+	
+	public int getGold(){
+		return gold;
+	}
 
 	public String toString(){
 		return name;
 	}
-
-
-    public static void main(String[] args){
-        State germany = new State("Germany", 1,1,1,1);
-        System.out.println(germany.getBuildings());
-        germany.build(new Building("Barracks"));
-        System.out.println(germany.getBuildings());
-    }
 
 }
