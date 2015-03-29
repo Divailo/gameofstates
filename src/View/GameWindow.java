@@ -1,7 +1,7 @@
 package View;
 
-import Data.City;
-import Data.State;
+import java.util.Scanner;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -14,6 +14,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import Data.City;
+import Data.State;
 
 
 /**
@@ -23,14 +25,14 @@ public class GameWindow extends Application {
 	
 	private final Font buttonFont = Font.loadFont(getClass().getResourceAsStream("\\Styles\\gamecuben.TTF"), 12);
 
-    public static City selectedCity;
+    private City selectedCity;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-//        Scanner sc = new Scanner(System.in);
-//        System.out.println("Choose base:");
-//        String townName = sc.nextLine();
-        Model.Application.player = new State("Value Town",4,4,4,4);
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Choose base:");
+        String townName = sc.nextLine();
+        Model.Application.player = new State(townName,4,4,4,4);
         Model.Application.player.setGold(400);
         selectedCity = new City(Model.Application.player);
 
@@ -44,6 +46,7 @@ public class GameWindow extends Application {
 
 
         Image image = new Image(getClass().getResource("..\\res\\EnglandMap.png").toExternalForm());
+        
         ImageView map = new ImageView(image);
         map.setFitHeight(650);
         map.setFitWidth(800);
@@ -55,25 +58,27 @@ public class GameWindow extends Application {
 
             @Override
             public void handle(ActionEvent event) {
-                Button source = (Button) event.getSource();
-                FlowPane bottomLayout = (FlowPane) source.getParent();
-                bottomLayout.getChildren().clear();
-
-
-                Button back = new Button("< Back");
-                back.setOnAction(new BackHandler());
-                
-
-                Button barracks = new Button("Barracks");
-                barracks.setOnAction(new BuildHandler(selectedCity));
-                Button church = new Button("Church");
-                church.setOnAction(new BuildHandler(selectedCity));
-                Button hall = new Button("Hall");
-                hall.setOnAction(new BuildHandler(selectedCity));
-                Button market = new Button("Market");
-                market.setOnAction(new BuildHandler(selectedCity));
-
-                bottomLayout.getChildren().addAll(back, barracks, church, hall, market);
+            	BuildingsView bp = new BuildingsView(selectedCity);
+//                System.out.println(selectedCity);
+//                Button source = (Button) event.getSource();
+//                FlowPane bottomLayout = (FlowPane) source.getParent();
+//                bottomLayout.getChildren().clear();
+//
+//
+//                Button back = new Button("<- Back");
+//                back.setOnAction(new BackHandler());
+//                
+//
+//                Button barracks = new Button("Barracks");
+//                barracks.setOnAction(new BuildHandler(selectedCity));
+//                Button church = new Button("Church");
+//                church.setOnAction(new BuildHandler(selectedCity));
+//                Button hall = new Button("Hall");
+//                hall.setOnAction(new BuildHandler(selectedCity));
+//                Button market = new Button("Market");
+//                market.setOnAction(new BuildHandler(selectedCity));
+//
+//                bottomLayout.getChildren().addAll(back, barracks, church, hall, market);
 
             }
         });
@@ -119,10 +124,6 @@ public class GameWindow extends Application {
 
     public void  run(String[] args){
         launch(args);
-    }
-
-    public City getSelectedCity(){
-        return selectedCity;
     }
 
     public static void main(String[] args){

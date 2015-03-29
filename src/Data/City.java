@@ -1,14 +1,15 @@
 package Data;
 
-import Data.Buildings.Building;
-import Data.Enums.Buildings;
+import java.util.ArrayList;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
-import java.util.ArrayList;
+import Data.Buildings.Building;
+import Data.Enums.Buildings;
 
 public class City {
 
@@ -26,10 +27,6 @@ public class City {
 	    	if(buildings.contains(building)){
 	    		System.out.println(building + " upgraded successfully to " + (building.getLevel()+1) + " !It costed " + building.getCost() + " gold");
 	    	}
-	    	else{
-	    		System.out.println(building + " constructed! It costed "+ building.getCost()+ " gold");
-	    		buildings.add(building);
-	    	}
 	    int gold = this.getGold();
     	owner.setGold(gold - building.getCost());
 	    building.upgrade();
@@ -40,7 +37,9 @@ public class City {
             VBox layout = new VBox();
             Label message = new Label();
             message.setText("Not enough minerals");
+            layout.getChildren().add(message);
             Scene scene = new Scene(layout,200,50);
+            dialog.initModality(Modality.APPLICATION_MODAL);
             dialog.setScene(scene);
             dialog.show();
 
@@ -52,11 +51,13 @@ public class City {
     	int gold = owner.getGold();
     	for(Building built : buildings){
     		if(built.getUnit().equals(unit)){
+    		if(built.getLevel()>0){
     			int goldSpent = unit.getCost();
     			owner.setGold(gold - goldSpent);
     			System.out.println(goldSpent + " gold spent");
     			System.out.println("Unit: "+unit+" trained successfully!");
     			return;
+    		}
     		}
     	}
     	System.out.println("The building is not built yet.");
