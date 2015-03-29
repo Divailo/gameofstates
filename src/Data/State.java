@@ -5,6 +5,7 @@ public class State {
 	private int military, culture, faith, economy, gold;
 	private String name;
 	
+
 	public State(String name, int mil, int cul, int fai, int eco){
 		this.name = name;
 		military = mil; culture = cul;	faith = fai; economy = eco;

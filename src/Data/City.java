@@ -1,8 +1,13 @@
 package Data;
 
-import java.util.ArrayList;
-
 import Data.Buildings.Building;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
+import java.util.ArrayList;
 
 public class City {
 
@@ -28,8 +33,15 @@ public class City {
 	    building.upgrade();
     	}
     	else{
-    		System.out.println("Not enough gold");
-    	}
+            Stage dialog = new Stage();
+            dialog.initStyle(StageStyle.UTILITY);
+            VBox layout = new VBox();
+            layout.getChildren().addAll(new Label("Not enough minerals"));
+            Scene scene = new Scene(layout,250, 250);
+            dialog.setScene(scene);
+            dialog.show();
+
+        }
     }
 
     public void trainUnit(Unit unit){

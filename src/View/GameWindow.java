@@ -1,5 +1,7 @@
 package View;
 
+import Data.City;
+import Data.State;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -13,6 +15,8 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.util.Scanner;
+
 
 /**
  * Created by Rosen on 29/03/2015.
@@ -21,9 +25,16 @@ public class GameWindow extends Application {
 	
 	private final Font buttonFont = Font.loadFont(getClass().getResourceAsStream("\\Styles\\gamecuben.TTF"), 12);
 
+    private City selectedCity;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Choose base:");
+        String townName = sc.nextLine();
+        Model.Application.player = new State(townName,4,4,4,4);
+        Model.Application.player.setGold(400);
+        selectedCity = new City(Model.Application.player);
 
         BorderPane layout = new BorderPane();
 
@@ -46,19 +57,25 @@ public class GameWindow extends Application {
 
             @Override
             public void handle(ActionEvent event) {
+                System.out.println(selectedCity);
+                Button source = (Button) event.getSource();
+                FlowPane bottomLayout = (FlowPane) source.getParent();
+                bottomLayout.getChildren().clear();
+
 
                 Button back = new Button("<- Back");
                 back.setOnAction(new BackHandler());
                 
 
                 Button barracks = new Button("Barracks");
+                barracks.setOnAction(new BuildHandler(selectedCity));
                 Button church = new Button("Church");
+                church.setOnAction(new BuildHandler(selectedCity));
                 Button hall = new Button("Hall");
+                hall.setOnAction(new BuildHandler(selectedCity));
                 Button market = new Button("Market");
-                
-                Button source = (Button) event.getSource();
-                FlowPane bottomLayout = (FlowPane) source.getParent();
-                bottomLayout.getChildren().clear();
+                market.setOnAction(new BuildHandler(selectedCity));
+
                 bottomLayout.getChildren().addAll(back, barracks, church, hall, market);
 
             }
@@ -106,6 +123,9 @@ public class GameWindow extends Application {
 
     }
 
+    public void  run(String[] args){
+        launch(args);
+    }
 
     public static void main(String[] args){
         launch(args);

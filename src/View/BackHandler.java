@@ -23,7 +23,6 @@ public class BackHandler implements EventHandler<ActionEvent> {
             @Override
             public void handle(ActionEvent event) {
 
-                Button[] buildButtons = new Button[5];
                 Button back = new Button("<- Back");
                 back.setOnAction(new BackHandler());
 

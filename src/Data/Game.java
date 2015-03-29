@@ -3,13 +3,13 @@ package Data;
 
 public class Game {
 	
-	private State home;
+	private City home;
 	
-	public Game(State s){
-		home = s;
+	public Game(City c){
+		home = c;
 	}
 	
-	public State getHome(){
+	public City getHome(){
 		return home;
 	}
 	

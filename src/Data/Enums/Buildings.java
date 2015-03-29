@@ -1,8 +1,8 @@
 package Data.Enums;
 
-import java.util.ArrayList;
-
 import Data.Unit;
+
+import java.util.ArrayList;
 
 public enum Buildings {
 	
@@ -24,4 +24,5 @@ public enum Buildings {
 	public int cost(){
 		return cost;
 	}
+
 }
