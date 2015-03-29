@@ -39,7 +39,7 @@ public class Building {
 	}
 	
 	public String toString(){
-		return name + " Level "+ level;
+		return name;
 	}
 	
 }
