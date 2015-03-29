@@ -1,6 +1,7 @@
 package Data;
 
 import Data.Buildings.Building;
+import Data.Enums.Buildings;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -17,6 +18,7 @@ public class City {
     public City(State ownerState){
     	owner = ownerState;
     	buildings = new ArrayList<Building>();
+        generateBuildings();
     }
     
     public void build(Building building){
@@ -36,13 +38,15 @@ public class City {
             Stage dialog = new Stage();
             dialog.initStyle(StageStyle.UTILITY);
             VBox layout = new VBox();
-            layout.getChildren().addAll(new Label("Not enough minerals"));
-            Scene scene = new Scene(layout,250, 250);
+            Label message = new Label();
+            message.setText("Not enough minerals");
+            Scene scene = new Scene(layout,200,50);
             dialog.setScene(scene);
             dialog.show();
 
         }
     }
+
 
     public void trainUnit(Unit unit){
     	int gold = owner.getGold();
@@ -57,13 +61,29 @@ public class City {
     	}
     	System.out.println("The building is not built yet.");
     }
-    
+
+    public void generateBuildings(){
+        buildings.add(new Building(Buildings.BARRACKS));
+        buildings.add(new Building(Buildings.CHURCH));
+        buildings.add(new Building(Buildings.HALL));
+        buildings.add(new Building(Buildings.MARKET));
+    }
+
     public int getGold(){
     	return owner.getGold();
     }
     
 	public ArrayList<Building> getBuildings(){
         return buildings;
+    }
+
+    public String printBuildings(){
+        String toReturn = "";
+        for(Building b: buildings){
+            toReturn = toReturn.concat(b + " (Level " + b.getLevel() + ") ");
+        }
+
+        return toReturn;
     }
 
 }

@@ -15,8 +15,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-import java.util.Scanner;
-
 
 /**
  * Created by Rosen on 29/03/2015.
@@ -25,14 +23,14 @@ public class GameWindow extends Application {
 	
 	private final Font buttonFont = Font.loadFont(getClass().getResourceAsStream("\\Styles\\gamecuben.TTF"), 12);
 
-    private City selectedCity;
+    public static City selectedCity;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Choose base:");
-        String townName = sc.nextLine();
-        Model.Application.player = new State(townName,4,4,4,4);
+//        Scanner sc = new Scanner(System.in);
+//        System.out.println("Choose base:");
+//        String townName = sc.nextLine();
+        Model.Application.player = new State("Value Town",4,4,4,4);
         Model.Application.player.setGold(400);
         selectedCity = new City(Model.Application.player);
 
@@ -57,13 +55,12 @@ public class GameWindow extends Application {
 
             @Override
             public void handle(ActionEvent event) {
-                System.out.println(selectedCity);
                 Button source = (Button) event.getSource();
                 FlowPane bottomLayout = (FlowPane) source.getParent();
                 bottomLayout.getChildren().clear();
 
 
-                Button back = new Button("<- Back");
+                Button back = new Button("< Back");
                 back.setOnAction(new BackHandler());
                 
 
@@ -122,6 +119,10 @@ public class GameWindow extends Application {
 
     public void  run(String[] args){
         launch(args);
+    }
+
+    public City getSelectedCity(){
+        return selectedCity;
     }
 
     public static void main(String[] args){

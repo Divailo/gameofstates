@@ -10,6 +10,10 @@ import javafx.scene.layout.FlowPane;
  * Created by Rosen on 29/03/2015.
  */
 public class BackHandler implements EventHandler<ActionEvent> {
+
+
+
+
     @Override
     public void handle(ActionEvent event) {
         Button source = (Button) event.getSource();
@@ -23,13 +27,17 @@ public class BackHandler implements EventHandler<ActionEvent> {
             @Override
             public void handle(ActionEvent event) {
 
-                Button back = new Button("<- Back");
+                Button back = new Button("< Back");
                 back.setOnAction(new BackHandler());
 
                 Button barracks = new Button("Barracks");
+                barracks.setOnAction(new BuildHandler(GameWindow.selectedCity));
                 Button church = new Button("Church");
+                church.setOnAction(new BuildHandler(GameWindow.selectedCity));
                 Button hall = new Button("Hall");
+                hall.setOnAction(new BuildHandler(GameWindow.selectedCity));
                 Button market = new Button("Market");
+                market.setOnAction(new BuildHandler(GameWindow.selectedCity));
 
                 Button source = (Button) event.getSource();
                 FlowPane bottomLayout = (FlowPane) source.getParent();

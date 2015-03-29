@@ -2,7 +2,6 @@ package View;
 
 import Data.Buildings.Building;
 import Data.City;
-import Data.Enums.Buildings;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -22,10 +21,12 @@ public class BuildHandler implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent event) {
         Button source = (Button) event.getSource();
-        String name = source.getText().toUpperCase();
-        Buildings enumValue = Buildings.valueOf(name);
-        Building building = new Building(enumValue);
-        System.out.println(city.getGold());
-        city.build(building);
+        for(Building b : city.getBuildings()){
+            if(b.toString().toLowerCase().equals(source.getText().toLowerCase())){
+                city.build(b);
+            }
+        }
+//        System.out.println(city.getGold());
+        System.out.println(city.printBuildings());
     }
 }
