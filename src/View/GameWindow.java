@@ -95,9 +95,6 @@ public class GameWindow extends Application {
         Button selectUnit = new Button("Select Unit");
         Button endTurn = new Button("End Turn");
         
-       	selectCity.setFont(buttonFont); selectUnit.setFont(buttonFont); endTurn.setFont(buttonFont);
-       	move.setFont(buttonFont); train.setFont(buttonFont); build.setFont(buttonFont);
-
 
         FlowPane bottomLayout = new FlowPane();
         bottomLayout.setAlignment(Pos.CENTER);
