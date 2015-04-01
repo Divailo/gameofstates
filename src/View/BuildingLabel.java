@@ -1,7 +1,5 @@
 package View;
 
-import javax.swing.plaf.synth.SynthSpinnerUI;
-
 import javafx.scene.control.Label;
 import Data.Buildings.Building;
 

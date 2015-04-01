@@ -1,7 +1,7 @@
 package Model;
 
 import Data.State;
-import View.GameWindow;
+import View.LoginWindow;
 
 public class Application {
 
@@ -18,8 +18,12 @@ public class Application {
 //        City city = new City(homeTown);
 //		Game g = new Game(city); // new game test
 //        System.out.println(city);
-        GameWindow gw = new GameWindow();
-        gw.run(args);
+//        GameWindow gw = new GameWindow();
+//        gw.run(args);
+        
+		//nakraq tree da e new Game(), koito da loadwa loginWindow
+        LoginWindow lw = new LoginWindow();
+        lw.run(args);
 
 //		System.out.println("Your home is: " + g.getHome());
 //		System.out.println("Your gold: " + homeTown.getGold());

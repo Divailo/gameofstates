@@ -7,7 +7,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -18,12 +17,15 @@ import javafx.scene.layout.VBoxBuilder;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import Controller.BackHandler;
+import Controller.BuildHandler;
 import Data.City;
 import Data.Buildings.Building;
 
-public class BuildingsView extends GridPane {
+public class BuildingsView extends BorderPane {
 	
 	private City currentCity;
+	private GridPane buildingsPane;
 	
 	public BuildingsView(City c){
 		currentCity = c;
@@ -32,13 +34,16 @@ public class BuildingsView extends GridPane {
 		String label2 = "Church ( Level ";
 		String label3 = "Hall ( Level ";
 		String label4 = "Market (Level ";
+		Stage stage = new Stage();
+		buildingsPane = new GridPane();
 		generateBox(image, currentCity.getBuildings().get(0) , 0,0);
 		generateBox(image, currentCity.getBuildings().get(1), 0,1);
 		generateBox(image, currentCity.getBuildings().get(2), 1,0);
 		generateBox(image, currentCity.getBuildings().get(3), 1,1);
-		Stage stage = new Stage();
+		this.setCenter(buildingsPane);
+		generateBackButton(stage);
         stage.setTitle("Buildings");
-        Scene buildingScene = new Scene(this,450,480);
+        Scene buildingScene = new Scene(this,450,510);
         stage.setScene(buildingScene);
         stage.show();
 	}
@@ -64,6 +69,7 @@ public class BuildingsView extends GridPane {
 						dialogStage.close();
 					}
 				});
+				//biggest shit ever
 				Scene scene = new Scene(VBoxBuilder.create().children(new Text("Are you sure you want to build " + l.getText() + "?"), HBoxBuilder.create().children(yesButton,noButton).alignment(Pos.CENTER).prefWidth(50).prefHeight(50).padding(new Insets(5)).build()).
 					    alignment(Pos.CENTER).padding(new Insets(5)).build());
 				
@@ -76,7 +82,15 @@ public class BuildingsView extends GridPane {
 		iv.setFitWidth(200);
 		bp.setCenter(iv);
 		bp.setBottom(l);
-		this.add(bp, c, r);
+		buildingsPane.add(bp, c, r);
+	}
+	
+	private void generateBackButton(Stage stage){
+		//back buttons :S
+        Button backButton = new Button("< Back");
+        BorderPane.setAlignment(backButton, Pos.BOTTOM_CENTER);
+        backButton.setOnAction(new BackHandler(stage));
+        this.setBottom(backButton);
 	}
 
 }
