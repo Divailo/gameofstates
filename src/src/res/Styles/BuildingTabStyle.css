@@ -1,0 +1,44 @@
+#church:hover {
+	-fx-image: url(../church.jpg); 
+}
+
+#church {
+	-fx-image: url(../churchBW.jpg);
+}
+
+#market:hover {
+	-fx-image: url(../market.jpg); 
+}
+
+#market {
+	-fx-image: url(../marketBW.jpg);
+}
+
+#hall:hover {
+	-fx-image: url(../hall.jpg); 
+}
+
+#hall {
+	-fx-image: url(../hallBW.jpg);
+}
+
+#barracks:hover {
+	-fx-image: url(../barracks.jpg); 
+}
+
+#barracks {
+	-fx-image: url(../barracksBW.jpg);
+}
+
+.button {
+    -fx-padding: 5px 12px;
+    -fx-display: block;
+    -fx-color: #9fa8b0;
+    -fx-border: 1px solid #1c252b;
+    -fx-border-radius: 3px;
+    -fx-font-family: gamecuben;
+}
+
+.button:hover {
+    -fx-color: #fff;
+}

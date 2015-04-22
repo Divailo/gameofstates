@@ -1,0 +1,44 @@
+#prophet:hover {
+	-fx-image: url(../prophet.jpg); 
+}
+
+#prophet {
+	-fx-image: url(../prophetBW.jpg);
+}
+
+#merchant:hover {
+	-fx-image: url(../merchant.jpg); 
+}
+
+#merchant {
+	-fx-image: url(../merchantBW.jpg);
+}
+
+#popstar:hover {
+	-fx-image: url(../popstar.jpg); 
+}
+
+#popstar {
+	-fx-image: url(../popstarBW.jpg);
+}
+
+#warrior:hover {
+	-fx-image: url(../warrior.jpg); 
+}
+
+#warrior {
+	-fx-image: url(../warriorBW.jpg);
+}
+
+.button {
+    -fx-padding: 5px 12px;
+    -fx-display: block;
+    -fx-color: #9fa8b0;
+    -fx-border: 1px solid #1c252b;
+    -fx-border-radius: 3px;
+    -fx-font-family: gamecuben;
+}
+
+.button:hover {
+    -fx-color: #fff;
+}
